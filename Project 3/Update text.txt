@@ -1,0 +1,26 @@
+
+
+UPDATE
+
+Manage user account. The user is allowed to view/update his/her information, such as e-mail
+address, name, address, password, and the registered credit cards. For the latter, the user is
+allowed to delete a credit card, update the information on an existing card, or insert a new card.
+The user should also be able to see all his/her past transactions, ordered by date.
+
+UPDATE 
+SET Email = 'newEmail'
+WHERE Username? = Myusername;
+
+UPDATE 
+SET Name= 'newName'
+WHERE Username? = Myusername;
+
+UPDATE 
+SET Password= 'newPassword'
+WHERE Username? = Myusername;
+
+UPDATE 
+SET Address= 'newAddress'
+WHERE Username? = Myusername;
+
+//Credit Card Update
