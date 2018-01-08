@@ -1,0 +1,42 @@
+INSERT INTO CUSTOMER VALUES
+('CoffeeMan', 'cool12345', '1987-09-22' 'Bob@gmail.com', 'Bobby Brown'),
+('HappyGilmore', 'tunaS', '1987-09-22' 'Bob@gmail.com', 'Happy Gilmore'),
+('CmpERules', 'password1234', '1990-05-14', 'JoeShmoe@yahoo.com', 'Joe Schmoe'),
+('BobBarker69', 'password1010' '1927-11-12', 'BobbyBarker@yahoo.com', 'Bob Barker'),
+('PizzaIsCool' 'pizza7890', '1990-03-25', 'pizzaman@yahoo.com', 'Bill Murray');
+
+INSERT INTO bookRating VALUES
+(5, 'It was a greatbook', 'CoffeeMan', 01),
+(5, 'It was a good book', 'CoffeeMan', 02),
+(5, 'It was a good book', 'CoffeeMan', 03),
+(4, 'It was a good book', 'HappyGilmore', 03),
+(4, 'It was a good book', 'HappyGilmore', 02),
+(4, 'It was a good book', 'HappyGilmore', 04),
+(3, 'It was an okay book', 'CmpERules', 05),
+(3, 'It was an okay book', 'CmpERules', 01),
+(3, 'It was an okay book', 'CmpERules', 06),
+(1, 'It was a bad book', 'BobBarker69', 07),
+(1, 'It was a bad book', 'BobBarker69', 08),
+(1, 'It was a bad book', 'BobBarker69', 01),
+(5, 'It was a good book', 'PizzaIsCool', 09),
+(5, 'It was a good book', 'PizzaIsCool', 08);
+(5, 'It was a good book', 'PizzaIsCool', 10);
+
+INSERT INTO Book VALUES
+(01, 10, 1, 1997, 'Eat Tacos', 'Wilheard Firoozeh', 'Scholastic'),
+(02, 20, 2, 1995, 'Eat Tuna', 'Wilheard Firoozeh', 'Scholastic'),
+(03, 1, 7, 1990, 'I Like Pens',  'Ema Anish', 'Scholastic'),
+(04, 2, 1, 2001, 'I Like Turtles',  'Ema Anish', 'Scholastic'),
+(05, 50, 1, 2001, 'Swag Me Out Tony',  'Osvald Judite', 'Scholastic'),
+(06, 7, 5, 2001, 'Justin Bieber is a Werewolf',  'Osvald Judite', 'Scholastic'),
+(07, 4, 1, 2000, 'Star Wars', 'Arnifrid David', 'Scholastic'),
+(08, 3, 2, 2012, 'Taylor Swift', 'Arnifrid David', 'Scholastic'),
+(09, 9, 1, 2011, 'Tony vs. Lil B', 'Clarissa Asa', 'Scholastic'),
+(10, 1, 1, 2007, 'Skateboards', 'Clarissa Asa', 'Scholastic');
+
+INSERT INTO authorRating VALUES
+(5, 'This is a great author', 'CoffeeMan', 'Wilheard Firoozeh'),
+(5, 'This is a great author', 'HappyGilmore', 'Wilheard Firoozeh'),
+(1, 'This is a terrible author', 'CmpERules', 'Wilheard Firoozeh'),
+(3, 'This is an okay author', 'BobBarker69', 'Wilheard Firoozeh'),
+(5, 'This author writes great books', 'PizzaIsCool', 'Wilheard Firoozeh');
