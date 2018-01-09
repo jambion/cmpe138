@@ -1,0 +1,139 @@
+Queries from the textbook (CH4&CH5):
+
+Q0:
+SELECT Bdate, Address
+FROM EMPLOYEE
+WHERE Fname=‘John’ AND Minit=‘B’ AND Lname=‘Smith’;
+
+Query 1. Retrieve the name and address of all employees who work for the
+‘Research’ department.
+Q1: SELECT Fname, Lname, Address
+FROM EMPLOYEE, DEPARTMENT
+WHERE Dname=‘Research’ AND Dnumber=Dno;
+
+Query 2. For every project located in ‘Stafford’, list the project number, the
+controlling department number, and the department manager’s last name,
+address, and birth date.
+Q2: SELECT Pnumber, Dnum, Lname, Address, Bdate
+FROM PROJECT, DEPARTMENT, EMPLOYEE
+WHERE Dnum=Dnumber AND Mgr_ssn=Ssn AND
+Plocation=‘Stafford’;
+
+Query 8. For each employee, retrieve the employee’s first and last name and
+the first and last name of his or her immediate supervisor.
+Q8: SELECT E.Fname as supervisor_first, E.Lname as supervisor_last, S.Fname, S.Lname
+FROM EMPLOYEE AS E, EMPLOYEE AS S
+WHERE E.Superssn=S.Ssn;
+
+Q11: SELECT ALL Salary
+FROM EMPLOYEE;
+Q11A: SELECT DISTINCT Salary
+FROM EMPLOYEE
+
+Query 4. Make a list of all project numbers for projects that involve an
+employee whose last name is ‘Smith’, either as a worker or as a manager of the
+department that controls the project.
+Q4A: (SELECT DISTINCT Pnumber
+FROM PROJECT, DEPARTMENT, EMPLOYEE
+WHERE Dnum=Dnumber AND superssn=Ssn
+AND Lname='Smith' )
+UNION
+( SELECT DISTINCT Pnumber
+FROM PROJECT, WORKS_ON, EMPLOYEE
+WHERE Pnumber=Pno AND Essn=Ssn
+AND Lname='Smith' );
+
+Query 12. Retrieve all employees whose address is in Houston, Texas.
+Q12: SELECT Fname, Lname
+FROM EMPLOYEE
+WHERE Address LIKE '%Houston, TX%';
+
+Query 13. Show the resulting salaries if every employee working on the
+‘ProductX’ project is given a 10 percent raise.
+SELECT E.Fname, E.Lname, 1.1 * E.Salary AS Increased_sal
+FROM EMPLOYEE AS E, WORKS_ON AS W, PROJECT AS P
+WHERE E.Ssn=W.Essn AND W.Pno=P.Pnumber AND
+P.Pname='ProductX';
+
+Query 14. Retrieve all employees in department 5 whose salary is between
+$30,000 and $40,000.
+Q14: SELECT *
+FROM EMPLOYEE
+WHERE (Salary BETWEEN 30000 AND 40000) AND Dno = 5;
+
+Query 15. Retrieve a list of employees and the projects they are working on,
+ordered by department and, within each department, ordered alphabetically by
+last name, then first name.
+Q15: SELECT D.Dname, E.Lname, E.Fname, P.Pname
+FROM DEPARTMENT D, EMPLOYEE E, WORKS_ON W,
+PROJECT P
+WHERE D.Dnumber= E.Dno AND E.Ssn= W.Essn AND
+W.Pno= P.Pnumber
+ORDER BY D.Dname, E.Lname, E.Fname;
+
+Query 16. Retrieve the name of each employee who has a dependent with the
+same first name and is the same sex as the employee.
+Q16: SELECT E.Fname, E.Lname
+FROM EMPLOYEE AS E
+WHERE E.Ssn IN ( SELECT Essn
+FROM DEPENDENT AS D
+WHERE E.Fname=D.Dependent_name
+AND E.Sex=D.Sex );
+
+Query 28. For each department that has more than five employees, retrieve
+the department number and the number of its employees who are making
+more than $40,000.
+Q28: SELECT Dnumber, COUNT (*)
+FROM DEPARTMENT, EMPLOYEE
+WHERE Dnumber=Dno AND Salary>40000 AND Dno in
+( SELECT Dno
+FROM EMPLOYEE
+GROUP BY Dno
+HAVING COUNT (*) > 5)
+group by Dnumber;
+
+Query1Practice. For each department whose average employee salary is more than $30K, 
+retrieve the department name and the number of employees .
+
+SELECT       Dname, avg(salary), count(*)
+FROM          department, employee
+WHERE       Dnumber=Dno
+GROUP BY Dname
+HAVING  avg(salary)>=30000;
+
+Query2aPractice. Retrieve for each department the highest salary
+
+  SELECT       Dname, max(salary) as msalary
+  FROM          department, employee
+  WHERE       Dnumber=Dno
+  GROUP BY Dname;
+
+Query2bPractice.Retrieve the names of all employees who work 
+in the department that has the employee with the highest salary among all employees.
+
+With DeptSalaryMax as (
+  SELECT       Dname, dnumber, max(salary) as msalary
+  FROM          department, employee
+  WHERE       Dnumber=Dno
+  GROUP BY Dnumber
+),MaxDept as (Select * from DeptSalaryMax where msalary=
+(Select max(salary) from employee))
+Select fname,lname,dno from employee e,MaxDept m where e.dno=m.dnumber;
+
+
+------------------------
+SELECT dname,mgrssn,mgrstartdate,lname,fname
+FROM department,employee
+WHERE dnumber=$dno and mgrssn=ssn
+
+SELECT dlocation
+FROM dept_locations
+WHERE dnumber=$dno
+
+SELECT ssn,lname,fname
+FROM employee
+WHERE dno=$dno
+
+SELECT pnumber,pname,plocation
+FROM project
+WHERE dnum=$dno
